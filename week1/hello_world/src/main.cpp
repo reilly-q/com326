@@ -11,37 +11,31 @@
 // Include classes and headers
 #include "../inc/common.h"
 
-void introEnterName();  /* Get user to input name */
-void challenge1();      /* Print out lower case and upper case ascii alphabet and corresponding ascii ID */
+// Challenge Methods
+void challenge1();      /* Print ascii characters and ascii IDs */
 void challenge2();      /* FizzBuzz game */
-int  MaximumCupCakes(); /* challenge3(); A calculator for cupcake purchases and promotional deals */
+void challenge3();      /* Cupcake calculatr */
 void challenge4();      /* Gambler's ruin game */
+
+// Other methods
+void introEnterName();                      /* Get user to input name */
+int  MaximumCupCakes(int, int, int);        /* A calculator for cupcake purchases and promotional deals */
+void gamblersRuin(int, int, int);           /* The coomputer gambles its money away in the hopes it can make a profit */
+float randomNumberGenerator(float, float);  /* Creates a random float value between x and y */
+void displayGamblersScore(int, int, int);   /* Display the score for Gambler's Ruin game */
+int playAgain();                            /* Ask the user to play again and return result */
 
 // Main loop
 int main() {
+    //introEnterName();
 
-    int input1 = 1;
-
-    //introEnterName(); /* Call introEnterName */
-    //challenge1(); /* Call challenge1 */
+    //challenge1();
     //challenge2();
-    //std::cout << MaximumCupCakes();
+    //challenge3();
     challenge4();
-
 
     // End program
     return 0;
-}
-
-void introEnterName() {
-    std::cout << "Hello" << std::endl;          /* Hello world message */
-
-    std::string name = "";                      /* Name storage */
-    std::cout << "Please put in your name: ";   /* Print instruction */
-    std::cin >> name;                           /* Get user input */
-
-    // Print final result
-    std::cout << std::endl << "Your name: " + name << std::endl;
 }
 
 void challenge1() {
@@ -66,91 +60,164 @@ void challenge2() {
     std::cout << std::endl;                                                 /* New line */
 
     // For loop
-    for(int i = 1; i <= input; i++) {               /* Start at 1 and interate to user input */
+    for(int i = 1; i <= input; i++) {               /* Start at 1 and iterate to user input */
         if(i % 3 == 0 && i % 5 == 0) {              /* Requirements for FizzBuzz */
             std::cout << "FizzBuzz" << std::endl;
         } else if(i % 3 == 0) {                     /* Requirements for Buzz */
             std::cout << "Buzz" << std::endl;
         } else if(i % 5 == 0) {                     /* Requirements for Fizz */
             std::cout << "Fizz" << std::endl;
-        } else {                                    /* Requirements for generic number */
+        } else {                                    /* Requirements for number */
             std::cout << i << std::endl;
         }
     }
 }
 
-int MaximumCupCakes() {
-    float money;
-    float cost;
-    int requiredWrappers;
-    int cupcakes = 0;
-    int wrappers = 0;
+void challenge3() {
+    int n = 0, c = 0, m = 0; /* Store user input */
 
-    std::cin >> money;
-    std::cin >> cost;
-    std::cin >> requiredWrappers;
+    std::cout << "Welcome to the cupcake calculator. \nPlease enter your budget: "; /* User instruction */
+    std::cin >> n;                                                                  /* User input */
+    std::cout << std::endl;                                                         /* New line */
 
-    cupcakes = money / cost;
-    wrappers = (cupcakes / requiredWrappers) + cupcakes;
-    cupcakes = wrappers;
+    std::cout << "Please enter the cost of a cupcake: ";    /* User instruction */
+std::cin >> c;                                              /* User input */
+    std::cout << std::endl;                                 /* New line */
+
+    std::cout << "Please enter the number of cupcake wrappers"
+        " you need for a free cupcake: ";                       /* User instruction */
+    std::cin >> m;                                              /* User input */
+    std::cout << std::endl;                                     /* New line */
+
+    // If statement to check that input is valid
+    if(m > 1 && c < n) {    /* Input is valid */
+        std::cout << "You can eat " << MaximumCupCakes(n, c, m) << " cupcakes." << std::endl;
+    } else {                /* Input is invalid */
+        std::cout <<
+            "Oops! The program cannot run if the required wrappers is less"
+            " than 2 or if the price of a cupcake is greater than your budget."
+            << std::endl;                                                       /* User warning */
+    }
+}
+
+void challenge4() {
+    // Initianize variables
+    int playerPot, goalPot, stake;
+
+    std::cout << "Welcome to Gambler's Ruin.\nChoose your starting pot: ";  /* User instruction */
+    std::cin >> playerPot;                                                  /* User input */
+    std::cout << std::endl;                                                 /* New line */
+
+    std::cout << "\nChoose your goal pot: ";    /* User instruction */
+    std::cin >> goalPot;                        /* User input */
+    std::cout << std::endl;                     /* New line */
+
+    std::cout << "\nChoose your stake: ";   /* User instruction */
+    std::cin >> stake;                      /* User input */
+    std::cout << std::endl;                 /* New line */
+
+    // Call game method
+    if(playerPot < goalPot) {
+        gamblersRuin(playerPot, goalPot, stake);
+    } else {
+        std::cout << "Goal pot must be larger than player pot." << std::endl;
+    }
+}
+
+void introEnterName() {
+    std::cout << "Hello" << std::endl;          /* Hello world message */
+
+    std::string name;                           /* Name storage */
+    std::cout << "Please put in your name: ";   /* Print instruction */
+    std::cin >> name;                           /* Get user input */
+
+    // Print final result
+    std::cout << std::endl << "Your name: " + name << std::endl;
+}
+
+int MaximumCupCakes(int n, int c, int m) {
+    int cupcakes = n / c;
+    int wrappers = cupcakes / m;
+    cupcakes += wrappers;
+
+    while(wrappers > 1) {
+        wrappers /= m;
+        cupcakes += wrappers;
+    }
 
     return cupcakes;
 }
 
-void challenge4() {
-     int playerPot = 10;
-     int goalPot = 20;
-     int stake = 1;
-     int totalBets = 0;
-     int totalWins = 0;
-     int totalLoses = 0;
-     float randomNumber = 0.0;
-     bool gameOver = 0;
+void gamblersRuin(int playerPot, int goalPot, int stake) {
+    // Initialize variables
+    int totalBets = 0;
+    int totalWins = 0;
+    int totalLoses = 0;
+    int originalPot = playerPot;
 
-     std::string input;
+    float randomNumber = 0.0;
 
-     std::random_device rd;                          /* Will be used to obtain a seed for the random number engine */
-     std::mt19937 gen(rd());                         /* Standard mersenne_twister_engine seeded with rd() */
-     std::uniform_real_distribution<> dis(0.0, 1.0);
+    bool gameOver = 0;
+    bool potDisplayed = 0;
 
-     // std::cout << randomNumber; /* Test Print */
+    // Game loop
+    while(gameOver == 0) {
+        playerPot = originalPot;
+        std::cout << "Your Pot: " << playerPot << std::endl; /* Player information */
+        while(playerPot >= stake && playerPot <= goalPot) {
+            randomNumber = randomNumberGenerator(0.0, 1.0);
 
-     std::cout << "Your Pot: " << playerPot << std::endl;
+            if(randomNumber >= 0.5) {
+                playerPot += stake;
+                std::cout << "Win!";
+            } else {
+                playerPot -= stake;
+                std::cout << "Lose!";
+            }
 
-     while(gameOver == 0) {
-         randomNumber = dis(gen);
+            std::cout << '\t' << "Pot: " << playerPot  << '\t' << '\t';
+            std::cout << "Outcome: " << '\t' << randomNumber << std::endl;
 
-         if(randomNumber >= 0.5) {
-             playerPot += stake;
-             std::cout << "Win!" << '\t';
-             std::cout << "Pot: " << playerPot << std::endl;
-         } else {
-             playerPot -= stake;
-             std::cout << "Lose!" << '\t';
-             std::cout << "Pot: " << playerPot << std::endl;
-         }
+            totalBets++;
+        }
 
-         if(playerPot == 0) {
-             std::cout << "Your pot is empty. Game over!" << std::endl;
+        if(playerPot < stake) {
+            std::cout << "Your pot is insufficient. Game over!" << std::endl;
+            totalLoses++;
+        } else if (playerPot >= goalPot) {
+            std::cout << "Your pot has reached the goal amount. Game over!" << std::endl;
+            totalWins++;
+        }
 
-             totalLoses++;
-         } else if (playerPot == goalPot) {
-             std::cout << "Your pot has reached the goal amount. Game over!" << std::endl;
+        displayGamblersScore(totalBets, totalWins, totalLoses);
+        gameOver = playAgain();
+    }
+}
 
-             totalWins++;
-         }
+float randomNumberGenerator(float x, float y) {
+    std::random_device randomDevice;
+    std::mt19937 generator(randomDevice());
+    std::uniform_real_distribution<> distributor(x, y);
 
-         totalBets++;
-     }
+    return distributor(generator);
+}
 
-     std::cout << std::endl << "Total Bets: " << totalBets << std::endl << "Total Wins: " << totalWins << std::endl << "Total Loses: " << totalLoses << std::endl;
-     std::cout << "Play again? (y/n): ";
-     std::cin >> input;
-     std::cout << std::endl;
+void displayGamblersScore(int totalBets, int totalWins, int totalLoses) {
+    std::cout << std::endl << "Total Bets: " << totalBets << std::endl << "Total Wins: " << totalWins << std::endl << "Total Loses: " << totalLoses << std::endl;
+}
 
-     if(input == "y") {
-         gameOver = 0;
-     } else {
-         gameOver = 1;
-     }
+int playAgain() {
+    // Declare variables
+    std::string input;
+
+    std::cout << "Play again? (y/n): "; /* User instruction */
+    std::cin >> input;                  /* User input */
+    std::cout << std::endl;             /* New line */
+
+    // If statement to determine the users input
+    if(input == "y") {
+        return 0;
+    } else {
+        return 1;
+    }
 }
