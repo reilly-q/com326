@@ -43,12 +43,14 @@ void challenge1() {
     char asciiLowerCase = 'a'; /* Store lower case character */
 
     // For loop
-    for(int i = asciiLowerCase; i <= 'z'; i++) {                                /* Init i as 97 and iterate until 122 */
-        std::cout << asciiUpperCase << '\t' << int(asciiUpperCase) << '\t';     /* Print the rest of lower case alphabet */
-        asciiUpperCase++;                                                       /* Iterate char for output */
+    for(int i = asciiLowerCase; i <= 'z'; i++) {    /* Init i as 97 and iterate until 122 */
+        std::cout << asciiUpperCase << '\t' <<
+            int(asciiUpperCase) << '\t';            /* Print the rest of lower case alphabet */
+        asciiUpperCase++;                           /* Iterate char for output */
 
-        std::cout << asciiLowerCase << '\t' << int(asciiLowerCase)  << std::endl;   /* Print the rest of lower case alphabet */
-        asciiLowerCase++;                                                           /* Iterate char for output */
+        std::cout << asciiLowerCase << '\t' <<
+            int(asciiLowerCase)  << std::endl;      /* Print the rest of lower case alphabet */
+        asciiLowerCase++;                           /* Iterate char for output */
     }
 }
 
@@ -116,11 +118,11 @@ void challenge4() {
     std::cin >> stake;                      /* User input */
     std::cout << std::endl;                 /* New line */
 
-    // Call game method
+    // If statement to check that input is valid
     if(playerPot < goalPot) {
         gamblersRuin(playerPot, goalPot, stake);
     } else {
-        std::cout << "Goal pot must be larger than player pot." << std::endl;
+        std::cout << "Goal pot must be larger than player pot." << std::endl; /* User warning */
     }
 }
 
@@ -165,32 +167,35 @@ void gamblersRuin(int playerPot, int goalPot, int stake) {
         playerPot = originalPot;
         std::cout << "Your Pot: " << playerPot << std::endl; /* Player information */
         while(playerPot >= stake && playerPot <= goalPot) {
-            randomNumber = randomNumberGenerator(0.0, 1.0);
+            randomNumber = randomNumberGenerator(0.0, 1.0); /* Call randomNumberGenerator method */
 
-            if(randomNumber >= 0.5) {
-                playerPot += stake;
+            // Points if statement
+            if(randomNumber >= 0.5) {   /* Win points condition */
+                playerPot += stake;     /* Add points to player pot */
                 std::cout << "Win!";
-            } else {
-                playerPot -= stake;
+            } else {                    /* Lose points condition */
+                playerPot -= stake;     /* Subtract points to player pot */
                 std::cout << "Lose!";
             }
 
+            // Print game information
             std::cout << '\t' << "Pot: " << playerPot  << '\t' << '\t';
             std::cout << "Outcome: " << '\t' << randomNumber << std::endl;
 
-            totalBets++;
+            totalBets++; /* Count bets */
         }
 
-        if(playerPot < stake) {
+        // Game over if statement
+        if(playerPot < stake) {             /* Lose game condition */
             std::cout << "Your pot is insufficient. Game over!" << std::endl;
-            totalLoses++;
-        } else if (playerPot >= goalPot) {
+            totalLoses++;                   /* Add points to total loses */
+        } else if (playerPot >= goalPot) {  /* Win game condition */
             std::cout << "Your pot has reached the goal amount. Game over!" << std::endl;
-            totalWins++;
+            totalWins++;                    /* Add points to total wins */
         }
 
-        displayGamblersScore(totalBets, totalWins, totalLoses);
-        gameOver = playAgain();
+        displayGamblersScore(totalBets, totalWins, totalLoses); /* Display total wins, loses and bets */
+        gameOver = playAgain();                                 /* Ask user if they want to play again */
     }
 }
 
@@ -199,11 +204,13 @@ float randomNumberGenerator(float x, float y) {
     std::mt19937 generator(randomDevice());
     std::uniform_real_distribution<> distributor(x, y);
 
-    return distributor(generator);
+    return distributor(generator); /* Return final random number*/
 }
 
 void displayGamblersScore(int totalBets, int totalWins, int totalLoses) {
-    std::cout << std::endl << "Total Bets: " << totalBets << std::endl << "Total Wins: " << totalWins << std::endl << "Total Loses: " << totalLoses << std::endl;
+    std::cout << std::endl << "Total Bets: " << totalBets << std::endl <<
+        "Total Wins: " << totalWins << std::endl << "Total Loses: " <<
+        totalLoses << std::endl << totalWins / (totalWins + totalLoses) << "% of games are wins." << std::endl; /* Final score of Gambler's ruin is displayed */
 }
 
 int playAgain() {
