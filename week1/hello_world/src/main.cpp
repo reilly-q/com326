@@ -119,10 +119,11 @@ void challenge4() {
     std::cout << std::endl;                 /* New line */
 
     // If statement to check that input is valid
-    if(playerPot < goalPot) {
+    if(playerPot < goalPot && playerPot >= stake) {
         gamblersRuin(playerPot, goalPot, stake);
     } else {
-        std::cout << "Goal pot must be larger than player pot." << std::endl; /* User warning */
+        std::cout << "Goal pot must be larger than player pot and stake must be "
+        "smaller than or equal to player pot." << std::endl; /* User warning */
     }
 }
 
@@ -164,9 +165,11 @@ void gamblersRuin(int playerPot, int goalPot, int stake) {
 
     // Game loop
     while(gameOver == 0) {
+
         playerPot = originalPot;
         std::cout << "Your Pot: " << playerPot << std::endl; /* Player information */
-        while(playerPot >= stake && playerPot <= goalPot) {
+
+        while(playerPot >= stake && playerPot < goalPot) {
             randomNumber = randomNumberGenerator(0.0, 1.0); /* Call randomNumberGenerator method */
 
             // Points if statement
@@ -210,7 +213,8 @@ float randomNumberGenerator(float x, float y) {
 void displayGamblersScore(int totalBets, int totalWins, int totalLoses) {
     std::cout << std::endl << "Total Bets: " << totalBets << std::endl <<
         "Total Wins: " << totalWins << std::endl << "Total Loses: " <<
-        totalLoses << std::endl << totalWins / (totalWins + totalLoses) << "% of games are wins." << std::endl; /* Final score of Gambler's ruin is displayed */
+        totalLoses << std::endl << (float(totalWins) / (totalWins + totalLoses)) * 100 <<
+        "% of games are wins." << std::endl; /* Final score of Gambler's ruin is displayed */
 }
 
 int playAgain() {
