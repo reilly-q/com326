@@ -54,7 +54,7 @@ void introDiceCountCombo() {
 void introRegex() {
     // Build a regex to extract postcode.
     std::string address = "Ulster University, Magee Campus, BT48 7JL, UK";
-    std::regex r1("[a-zA-z]{1, 2}\\d{1, 2} \\d{1, 2}[a-zA-z]{1,2}"); //\D\D\d\d\s\d\D\D
+    std::regex r1("[a-zA-Z]{1,2}\\d{1,2} \\d{1, 2}[a-zA-Z]{1,2}"); //\D\D\d\d\s\d\D\D
     std::smatch m1;
 
     if(std::regex_search(address, m1, r1)) {
