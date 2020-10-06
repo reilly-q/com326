@@ -12,14 +12,19 @@
 #include "../inc/common.h"
 
 // Challenge Methods
-void challenge1();
-void challenge2();
-void challenge3();
-void challenge4();
+void challenge1(); /* String warmup */
+void challenge2(); /* Camel case */
+void challenge3(); /* Valid email */
+void challenge4(); /* Caesar Cipher */
+
+void additionalChallenge1(); /* Swedish Chef */
+void additionalChallenge2(); /* Mars Exploration */
 
 // Other methods
 void introDiceCountCombo();
 void introRegex();
+std::string encryptMessage(std::string s, int k);
+std::string decryptMessage(std::string s, int k);
 
 // Main loop
 int main() {
@@ -90,6 +95,7 @@ void challenge2() {
     // Initialize variables
     std::string input;
     int count = 1;
+    int iter1 = 0, iter2l = 0;
 
     // Instruct user and get input.
     std::cout << "Enter a camel case statement to count its words: ";
@@ -146,53 +152,24 @@ void challenge4() {
 
     // Check for illegal characters.
     for(int i = 0; i < s.size(); i++) {
-        if(!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || "-")) {
+        if(!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || s[i] == '-')) {
             count++;
         }
     }
 
-    // Check that input is correct before encrypting and decrypting message.
+    /* If statement to check that input is correct
+     * before encrypting and decrypting message.
+     */
     if((k <= 100 && k >= 0) && count == 0) {
-        // Move letters foward.
-        for(int i = 0; i < s.size(); i++) {
-            count = 0;
-            for(int j = s[i]; j <= s[i] + k; j++) {
-                if(j > 'z') {
-                    count = 0;
-                } else {
-                    count++;
-                }
-            }
-            if(s[i] != '-') {
-                s[i] += count;
-            }
-        }
-
-        //count = 0;
-
-        std::cout << s << std::endl;
-
-        // Move letter back
-        for(int i = 0; i < s.size(); i++) {
-            count = 0;
-            for(int j = s[i]; j >= s[i] - k; j--) {
-                if(j < 'a') {
-                    count = 0;
-                } else {
-                    count++;
-                }
-            }
-            if(s[i] != '-') {
-                s[i] -= count;
-            }
-        }
-
-        std::cout << s << std::endl;
+        std::cout << encryptMessage(s, k) << std::endl; /* Print result. */
+        std::cout << decryptMessage(encryptMessage(s, k), k) << std::endl; /* Print result. */
     } else {
         std::cout << "Only letters are allowed. No spaces or numbers. "
-            "K must be between 0 and 100" << std::endl;
+            "Offset number must be between 0 and 100" << std::endl;
     }
+}
 
+void additionalChallenge1() {
 
 }
 
@@ -232,4 +209,53 @@ void introRegex() {
     } else {
         std::cout << "No match\n";
     }
+}
+
+std::string encryptMessage(std::string s, int k) {
+    // Initialize variables.
+    int iter1 = 0, iter2 = 0;
+
+    // Move letters foward.
+    for(int i = 0; i < s.size(); i++) { /* Encrypt message until letters are exhausted */
+        iter1 = s[i];       /* Original letter. */
+        iter2 = iter1;      /* Iterate from original letter. */
+        if(s[i] != '-') {   /* Only loop if letter is not a hyphen. */
+            for(int j = iter1; j <= 'z'; j++) { /* Second loop for alphabet starting at original letter. */
+                iter2++;
+                if(j == 'z') {              /* Restart loop at beginning of alphabet. */
+                    j = 'a';
+                }
+                s[i] = j;                   /* I of message = point in alphabet. */
+                if(iter2 == iter1 + k) {    /* Break condition */
+                    break;
+                }
+            }
+        }
+    }
+
+    return s;
+}
+std::string decryptMessage(std::string s, int k) {
+    // Initialize variables.
+    int iter1 = 0, iter2 = 0;
+
+    // Move letters backward.
+    for(int i = 0; i < s.size(); i++) { /* Decrypt message until letters are exhausted */
+        iter1 = s[i];       /* Original letter. */
+        iter2 = iter1;      /* Iterate from original letter. */
+        if(s[i] != '-') {   /* Only loop if letter is not a hyphen. */
+            for(int j = s[i]; j >= 'a'; j--) { /* Second loop for alphabet starting at original letter. */
+                iter2++;
+                if(j == 'a') {              /* Restart loop at beginning of alphabet. */
+                    j = 'z';
+                }
+                s[i] = j;                   /* I of message = point in alphabet. */
+                if(iter2 == iter1 + k) {    /* Break condition */
+                    break;
+                }
+            }
+        }
+    }
+
+    return s;
 }
