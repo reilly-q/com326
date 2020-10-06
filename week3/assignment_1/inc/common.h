@@ -1,9 +1,9 @@
 /*
  * common.h
  *
- * Version Information
+ * Version Information v1.1
  * Author: Quinn Reilly
- * Date: 22 sept 2020
+ * Date: 29 sept 2020
  *
  * Copyright notice
  */
@@ -18,8 +18,5 @@
 #include <random>
 #include <thread>
 #include <regex>
-
-//#include "../lib/SFML-2.5.1/include/SFML/Graphics.hpp"
-//#include "../lib/SFML-2.5.1/include/SFML/System.hpp"
 
 #endif

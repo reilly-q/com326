@@ -12,7 +12,7 @@ varTrg0 = 'bin/test/'
 varObj1 = 'bld/release/'
 varTrg1 = 'bin/release/'
 
-src = ['main.cpp', Glob('heartRate/*.cpp')]
+src = []
 trg = 'app'
 libs = ['sfml-window', 'sfml-graphics', 'sfml-system']
 libpath = ['lib/SFML-2.5.1/lib']
@@ -27,7 +27,7 @@ env1 = Environment(CCFLAGS = '-std=c++11 -pthread -Ilib/SFML-2.5.1/include')
 if bld == 0: # 0 = test
 	VariantDir(varObj0, varSrc0, duplicate = 0) # set object and source folder
 	trg = varTrg0 + trg # set target directory
-	src = [varObj0 + src[0]] # set all source files
+	src = [varObj0 + 'main.cpp', Glob(varObj0 + 'heartRates/*.cpp')] # set all source files
 elif bld == 1: # 1 = release
 	VariantDir(varObj1, varSrc0, duplicate = 0) # set object and source folder
 	trg = varTrg1 + trg # set target directory

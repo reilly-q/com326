@@ -11,6 +11,8 @@
 // Include classes and headers
 #include "../inc/common.h"
 
+#include "heartRates/HeartRates.h"
+
 // Challenge Methods
 void challenge1(); /* String warmup */
 void challenge2(); /* Camel case */
@@ -34,7 +36,11 @@ int main() {
     //challenge1();
     //challenge2();
     //challenge3();
-    challenge4();
+    //challenge4();
+
+    std::vector<int> test{03};
+    HeartRates heartRates;
+    heartRates.CorrectDateOfBirth(test);
 
     // End program
     return 0;
