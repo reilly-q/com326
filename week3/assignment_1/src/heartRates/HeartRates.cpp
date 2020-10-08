@@ -3,7 +3,7 @@
  *
  * Version Information v1.0
  * Author: Quinn Reilly
- * Date: 06 oct 2020
+ * Date: 07 oct 2020
  *
  * Copyright notice
  */
@@ -23,36 +23,49 @@ HeartRates::HeartRates() {
 
     age_ = 0;
     maxHeartRate_ = 0;
-    targetHeartRate_ = 0;
+    targetHeartRate1_ = 0;
+    targetHeartRate2_ = 0;
+    yearsSince1900_ = 0;
+    month_ = 0;
+    day_ = 0;
+
+    //CalculateDayMonthYear();
 }
 
-HeartRates::HeartRates(std::string nm1, std::string nm2, std::vector<int>& dob, int age, int maxHR, int targetHR) {
+HeartRates::HeartRates(std::string nm1, std::string nm2, std::vector<int>& dob) {
     // Init variables - strings, vectors, ints
     firstName_ = nm1;
     lastName_ = nm2;
 
     dateOfBirth_.reserve(3);  /* DD MM YYYY */
+
+    age_ = 0;
+    maxHeartRate_ = 0;
+    targetHeartRate1_ = 0;
+    targetHeartRate2_ = 0;
+    yearsSince1900_ = 0;
+    month_ = 0;
+    day_ = 0;
+
     CorrectDateOfBirth(dob);
+    //CalculateDayMonthYear();
+}
+
+HeartRates::HeartRates(std::string nm1, std::string nm2, std::vector<int>& dob, int age, int maxHR, int targetHR1, int targetHR2) {
+    // Init variables - strings, vectors, ints
+    firstName_ = nm1;
+    lastName_ = nm2;
+
+    dateOfBirth_.reserve(3);  /* DD MM YYYY */
 
     age_ = age;
     maxHeartRate_ = maxHR;
-    targetHeartRate_ = targetHR;
+    targetHeartRate1_ = targetHR1;
+    targetHeartRate2_ = targetHR2;
+    yearsSince1900_ = 0;
+    month_ = 0;
+    day_ = 0;
+
+    CorrectDateOfBirth(dob);
+    //CalculateDayMonthYear();
 }
-
-// Utility functions
-//void HeartRates::CorrectDateOfBirth(std::vector<int>&) {}
-void HeartRates::CalculateAge() {}
-void HeartRates::CalculateMaxHeartRate() {}
-void HeartRates::CalculateTargetHeartRate() {}
-
-// Setters - strings, vectors
-void HeartRates::SetFirstname(std::string nm) {}
-void HeartRates::SetLastName(std::string nm) {}
-
-void HeartRates::SetDateofBirth(std::vector<int>) {}
-
-// Getters - strings, vectors
-std::string HeartRates::GetFirstname() {return "Hello";}
-std::string HeartRates::GetLastName() {return "Hello";}
-
-std::vector<int>& HeartRates::GetDateofBirth() {return dateOfBirth_;}

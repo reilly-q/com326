@@ -17,7 +17,7 @@
 class HeartRates {
 private:
 
-    // Declare variables - strings, vectors, ints
+    // Declare variables - strings, vectors, ints, time_t
     std::string firstName_;
     std::string lastName_;
 
@@ -25,31 +25,36 @@ private:
 
     int age_;
     int maxHeartRate_;
-    int targetHeartRate_;
+    int targetHeartRate1_;
+    int targetHeartRate2_;
+    int yearsSince1900_;
+    int month_;
+    int day_;
 
 public:
 
     // Constructors
     HeartRates();
-    HeartRates(std::string, std::string, std::vector<int>&, int, int, int);
+    HeartRates(std::string nm1, std::string nm2, std::vector<int>& dob);
+    HeartRates(std::string, std::string, std::vector<int>&, int, int, int, int);
 
     // Utility functions
+    void CalculateDayMonthYear();
     void CorrectDateOfBirth(std::vector<int>&);
-    void CalculateAge();
     void CalculateMaxHeartRate();
     void CalculateTargetHeartRate();
 
     // Setters - strings, vectors
-    void SetFirstname(std::string nm);
+    void SetFirstName(std::string nm);
     void SetLastName(std::string nm);
 
-    void SetDateofBirth(std::vector<int>);
+    void SetDateOfBirth(std::vector<int>);
 
     // Getters - strings, vectors
-    std::string GetFirstname();
+    std::string GetFirstName();
     std::string GetLastName();
 
-    std::vector<int>& GetDateofBirth();
+    std::vector<int>& GetDateOfBirth();
 };
 
 #endif
