@@ -12,6 +12,9 @@
 #include "HeartRates.h"
 
 void HeartRates::CalculateMaxHeartRate() {
+    // Calculate max heart rate
     maxHeartRate_ = 220 - age_;
-    std::cout << "Your max heart rate is: " << maxHeartRate_ << std::endl;
+
+    // Print max heart rate
+    //std::cout << "Your max heart rate is: " << maxHeartRate_ << std::endl;
 }

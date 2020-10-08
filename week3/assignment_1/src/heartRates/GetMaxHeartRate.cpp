@@ -1,5 +1,5 @@
 /*
- * GetDateOfBirth.cpp
+ * GetMaxHeartRate.cpp
  *
  * Version Information v1.0
  * Author: Quinn Reilly
@@ -11,6 +11,6 @@
 // Include classes and headers
 #include "HeartRates.h"
 
-std::vector<int>& HeartRates::GetDateOfBirth() {
-    return dateOfBirth_;
+int HeartRates::GetMaxHeartRate() {
+    return maxHeartRate_;
 }

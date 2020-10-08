@@ -1,7 +1,7 @@
 /*
  * CorrectDateOfBirth.cpp
  *
- * Version Information v1.3
+ * Version Information v1.5
  * Author: Quinn Reilly
  * Date: 06 oct 2020
  *
@@ -15,7 +15,7 @@ void HeartRates::CorrectDateOfBirth(std::vector<int>& dob) {
     // Init variables - bools, vectors.
     bool dateVerified = 0;
 
-    std::vector<int> tmp; tmp.reserve(3);
+    std::vector<int> tmp; tmp.resize(3);
 
     // Prepare time for validation.
     CalculateDayMonthYear();
@@ -26,7 +26,7 @@ void HeartRates::CorrectDateOfBirth(std::vector<int>& dob) {
             tmp[i] = dob[i];
         }
 
-        std::cout << "Date of birth provided was larger than DD/MM/YYYY and\n"
+        std::cout << "Date of birth provided was larger than (Day/Month/Year) and\n"
             "has been successfully cut to correct size.";
     } else if(dob.size() < 3) { /* Insert into larger format. */
         for(int i = 0; i < tmp.size(); i++) {
@@ -37,19 +37,20 @@ void HeartRates::CorrectDateOfBirth(std::vector<int>& dob) {
             }
         }
 
-        std::cout << "Date of birth provided was smaller than DD/MM/YYYY and\n"
-            "has been successfully cut to correct size.";
-    } else {
-        tmp = dob;              /* insert into equal size format */
+        std::cout << "Date of birth provided was smaller than (Day/Month/Year) and\n"
+            "has been successfully inserted to correct size.";
+    } else {                    /* insert into equal size format */
+        tmp = dob;
 
-        std::cout << "Date of birth provided was equal to DD/MM/YYYY and\n"
-            "has been successfully cut to correct size.";
+        std::cout << "Date of birth provided was equal to (Day/Month/Year) and\n"
+            "has been successfully inserted.";
     }
 
     std::cout << std::endl;
+    std::cout << std::endl;
 
     // Verify year, month then day.
-    if(tmp[2] > 1900 && tmp[2] < 1900 + yearsSince1900_) {
+    if(tmp[2] >= 1900 && tmp[2] <= year_ - 1) {
         dateOfBirth_[2] = tmp[2];
         if(tmp[1] > 0 && tmp[1] < 13) {
             dateOfBirth_[1] = tmp[1];
@@ -79,29 +80,34 @@ void HeartRates::CorrectDateOfBirth(std::vector<int>& dob) {
 
             } else {
                 std::cout << "The day is not valid.";
+                std::cout << std::endl;
+                exit(-1);
             }
         } else {
             std::cout << "The month is not valid.";
+            std::cout << std::endl;
+            exit(-1);
         }
     } else {
         std::cout << "The year is not valid.";
+        std::cout << std::endl;
+        exit(-1);
     }
-
-    std::cout << std::endl;
 
     // Inform user of validation results.
     if(dateVerified == 1) {
         //Check if the users birthday has passed.
         if((dateOfBirth_[1] > month_) || (dateOfBirth_[1] == month_ && dateOfBirth_[0] > day_)) {
-            age_ = ((1900 + yearsSince1900_) - dateOfBirth_[2]) - 1;
+            age_ = (year_ - dateOfBirth_[2]) - 1;
         } else{
-            age_ = ((1900 + yearsSince1900_) - dateOfBirth_[2]);
+            age_ = (year_ - dateOfBirth_[2]);
         }
         std::cout << "The date has been successfully validated and age is set. ";
         std::cout << "You are " << age_ << " years old.";
+        std::cout << std::endl;
     } else {
-        std::cout << "The date has been not been successfully validated and is not set.";
+        std::cout << "The date has not been successfully validated and age is not set.";
+        std::cout << std::endl;
+        exit(-1);
     }
-
-    std::cout << std::endl;
 }

@@ -17,15 +17,15 @@ HeartRates::HeartRates() {
     firstName_ = "default";
     lastName_ = "default";
 
-    dateOfBirth_.push_back(00); /* DD MM YYYY */
-    dateOfBirth_.push_back(00); /* DD MM YYYY */
-    dateOfBirth_.push_back(0000); /* DD MM YYYY */
+    dateOfBirth_.push_back(00); /* (Day/Month/Year) */
+    dateOfBirth_.push_back(00); /* (Day/Month/Year) */
+    dateOfBirth_.push_back(0000); /* (Day/Month/Year) */
 
     age_ = 0;
     maxHeartRate_ = 0;
-    targetHeartRate1_ = 0;
-    targetHeartRate2_ = 0;
-    yearsSince1900_ = 0;
+    targetHeartRateLower_ = 0;
+    targetHeartRateHigher_ = 0;
+    year_ = 0;
     month_ = 0;
     day_ = 0;
 
@@ -37,13 +37,13 @@ HeartRates::HeartRates(std::string nm1, std::string nm2, std::vector<int>& dob) 
     firstName_ = nm1;
     lastName_ = nm2;
 
-    dateOfBirth_.reserve(3);  /* DD MM YYYY */
+    dateOfBirth_.resize(3);  /* DD MM YYYY */
 
     age_ = 0;
     maxHeartRate_ = 0;
-    targetHeartRate1_ = 0;
-    targetHeartRate2_ = 0;
-    yearsSince1900_ = 0;
+    targetHeartRateLower_ = 0;
+    targetHeartRateHigher_ = 0;
+    year_ = 0;
     month_ = 0;
     day_ = 0;
 
@@ -56,13 +56,13 @@ HeartRates::HeartRates(std::string nm1, std::string nm2, std::vector<int>& dob, 
     firstName_ = nm1;
     lastName_ = nm2;
 
-    dateOfBirth_.reserve(3);  /* DD MM YYYY */
+    dateOfBirth_.resize(3);  /* DD MM YYYY */
 
     age_ = age;
     maxHeartRate_ = maxHR;
-    targetHeartRate1_ = targetHR1;
-    targetHeartRate2_ = targetHR2;
-    yearsSince1900_ = 0;
+    targetHeartRateLower_ = targetHR1;
+    targetHeartRateHigher_ = targetHR2;
+    year_ = 0;
     month_ = 0;
     day_ = 0;
 
