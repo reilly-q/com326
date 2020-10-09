@@ -22,14 +22,12 @@ private:
     std::string lastName_;
 
     std::vector<int> dateOfBirth_;  /* (Day/Month/Year) */
+    std::vector<int> currentDate_;  /* (Day/Month/Year) */
 
     int age_;
     int maxHeartRate_;
     int targetHeartRateLower_;
     int targetHeartRateHigher_;
-    int year_;
-    int month_;
-    int day_;
 
 public:
 
@@ -49,14 +47,16 @@ public:
     void SetLastName(std::string);
 
     void SetDateOfBirth(std::vector<int>);
+    void SetCurrentDate(std::vector<int>);
 
     // Getters - strings, vectors
     std::string GetFirstName();
     std::string GetLastName();
 
     std::vector<int>& GetDateOfBirth();
+    std::vector<int>& GetCurrentDate();
 
-    // Getters for recommended and max heart rate
+    // Straggler Getters - ints
 
     int GetMaxHeartRate();
     int GetTargetHeartRateLower();

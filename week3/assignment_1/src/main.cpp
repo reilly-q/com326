@@ -26,17 +26,17 @@ int main() {
 
     // Instruct user and get input.
     // Get Name 1.
-    std::cout << "Please enter your first name: ";
+    std::cout << "Please enter your first name:\t\t";
     std::cin >> firstName;
     std::cout << std::endl;
 
     // Get Name 2.
-    std::cout << "Please enter your last name: ";
+    std::cout << "Please enter your last name:\t\t";
     std::cin >> lastName;
     std::cout << std::endl;
 
     // Get Date of Birth 1.
-    std::cout << "Please enter the day you were born: ";
+    std::cout << "Please enter the day you were born:\t";
     std::cin >> tmp;
     std::cout << std::endl;
     counter = CheckForLetters(tmp);
@@ -52,7 +52,7 @@ int main() {
     counter = 0;
 
     // Get Date of Birth 2.
-    std::cout << "Please enter the month you were born: ";
+    std::cout << "Please enter the month you were born:\t";
     std::cin >> tmp;
     std::cout << std::endl;
     counter = CheckForLetters(tmp);
@@ -68,7 +68,7 @@ int main() {
     counter = 0;
 
     // Get Date of Birth 3.
-    std::cout << "Please enter the year you were born: ";
+    std::cout << "Please enter the year you were born:\t";
     std::cin >> tmp;
     std::cout << std::endl;
     counter = CheckForLetters(tmp);
@@ -91,9 +91,9 @@ int main() {
     // Print output.
     std::cout << "Hello " << hr.GetFirstName() << " " << hr.GetLastName() << "." << std::endl;
 
-    std::cout << "Your max heart rate is: " << hr.GetMaxHeartRate() << "." << std::endl;
-    std::cout << "Your low target heart rate is: " << hr.GetTargetHeartRateLower() << "." << std::endl;
-    std::cout << "Your high target heart rate is: " << hr.GetTargetHeartRateHigher() << "." << std::endl;
+    std::cout << "Your max heart rate is:\t\t\t" << hr.GetMaxHeartRate() << std::endl;
+    std::cout << "Your low target heart rate is:\t\t" << hr.GetTargetHeartRateLower() << std::endl;
+    std::cout << "Your high target heart rate is:\t\t" << hr.GetTargetHeartRateHigher() << std::endl << std::endl;
 
     // End program
     return 0;

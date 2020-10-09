@@ -15,9 +15,9 @@ void HeartRates::CalculateDayMonthYear() {
     std::time_t tTime = std::time(nullptr);
     tm *localTime = localtime(&tTime);
 
-    year_ = 1900 + localTime->tm_year;
-    month_ = 1 + localTime->tm_mon;
-    day_ = localTime->tm_mday;
+    currentDate_[2] = 1900 + localTime->tm_year;
+    currentDate_[1] = 1 + localTime->tm_mon;
+    currentDate_[0] = localTime->tm_mday;
 
-    std::cout << "The current date is (Day/Month/Year): " << day_ << "/" << month_ << "/" << year_ << std::endl;
+    std::cout << "The current date is (Day/Month/Year):\t" << currentDate_[0] << "/" << currentDate_[1] << "/" << currentDate_[2] << std::endl << std::endl;
 }
