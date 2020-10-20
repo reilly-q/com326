@@ -18,12 +18,16 @@
 //#include "weapon/Weapon.h"
 
 // Challenge Methods
-void challenge1();
+void challenge1(); /* Crashing make the program crash on purpose. */
+void challenge2(); /* Use an assert. Check if the two arrays are the same size. */
+void challenge3(); /* Use an assert. Check if the two arrays are the same size. Wrapped in preprocessor. */
+void challenge4(); /* Create two students to test Student.h */
+void challenge5(); /* Implement a menu system */
 
 // Other methods
-void oldChallenge1(); /* Fight */
+void oldChallenge1();
 bool fight(Warrior, Wizard);
-float randomNumberGenerator(float, float);  /* Creates a random float value between x and y */
+float randomNumberGenerator();
 
 // Main loop
 int main() {

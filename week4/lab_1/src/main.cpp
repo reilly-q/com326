@@ -11,7 +11,7 @@
 // Include classes and headers
 #include "../inc/common.h"
 #include "student/Student.h"
-#include <cassert>
+
 
 // Challenge Methods
 void challenge1(); /* Crashing make the program crash on purpose. */
@@ -87,5 +87,5 @@ void challenge4() {
 }
 
 void challenge5() {
-    
+
 }
