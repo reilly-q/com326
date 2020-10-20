@@ -12,97 +12,26 @@
 #include "../inc/common.h"
 
 // Challenge Methods
-void challenge1();      /* Print ascii characters and ascii IDs */
-void challenge2();      /* FizzBuzz game */
-void challenge3();      /* Cupcake calculatr */
-void challenge4();      /* Gambler's ruin game */
+void challenge1();      /* Gambler's ruin game */
+void challenge2();      /* Problem of points game */
 
 // Other methods
-void introEnterName();                      /* Get user to input name */
-int  MaximumCupCakes(int, int, int);        /* A calculator for cupcake purchases and promotional deals */
 void gamblersRuin(int, int, int);           /* The coomputer gambles its money away in the hopes it can make a profit */
 float randomNumberGenerator(float, float);  /* Creates a random float value between x and y */
+int randomNumberGenerator(int, int);  /* Creates a random int value between x and y */
 void displayGamblersScore(int, int, int);   /* Display the score for Gambler's Ruin game */
 int playAgain();                            /* Ask the user to play again and return result */
 
 // Main loop
 int main() {
-    //introEnterName();
-
     //challenge1();
-    //challenge2();
-    //challenge3();
-    challenge4();
+    challenge2();
 
     // End program
     return 0;
 }
 
 void challenge1() {
-    char asciiUpperCase = 'A'; /* Store upper case character */
-    char asciiLowerCase = 'a'; /* Store lower case character */
-
-    // For loop
-    for(int i = asciiLowerCase; i <= 'z'; i++) {    /* Init i as 97 and iterate until 122 */
-        std::cout << asciiUpperCase << '\t' <<
-            int(asciiUpperCase) << '\t';            /* Print the rest of lower case alphabet */
-        asciiUpperCase++;                           /* Iterate char for output */
-
-        std::cout << asciiLowerCase << '\t' <<
-            int(asciiLowerCase)  << std::endl;      /* Print the rest of lower case alphabet */
-        asciiLowerCase++;                           /* Iterate char for output */
-    }
-}
-
-void challenge2() {
-    int input; /* Store user input */
-
-    std::cout << "Welcome to FizzBuzz. Enter the maximum number to play: "; /* User instruction */
-    std::cin >> input;                                                      /* User input */
-    std::cout << std::endl;                                                 /* New line */
-
-    // For loop
-    for(int i = 1; i <= input; i++) {               /* Start at 1 and iterate to user input */
-        if(i % 3 == 0 && i % 5 == 0) {              /* Requirements for FizzBuzz */
-            std::cout << "FizzBuzz" << std::endl;
-        } else if(i % 3 == 0) {                     /* Requirements for Buzz */
-            std::cout << "Buzz" << std::endl;
-        } else if(i % 5 == 0) {                     /* Requirements for Fizz */
-            std::cout << "Fizz" << std::endl;
-        } else {                                    /* Requirements for number */
-            std::cout << i << std::endl;
-        }
-    }
-}
-
-void challenge3() {
-    int n = 0, c = 0, m = 0; /* Store user input */
-
-    std::cout << "Welcome to the cupcake calculator. \nPlease enter your budget: "; /* User instruction */
-    std::cin >> n;                                                                  /* User input */
-    std::cout << std::endl;                                                         /* New line */
-
-    std::cout << "Please enter the cost of a cupcake: ";    /* User instruction */
-std::cin >> c;                                              /* User input */
-    std::cout << std::endl;                                 /* New line */
-
-    std::cout << "Please enter the number of cupcake wrappers"
-        " you need for a free cupcake: ";                       /* User instruction */
-    std::cin >> m;                                              /* User input */
-    std::cout << std::endl;                                     /* New line */
-
-    // If statement to check that input is valid
-    if(m > 1 && c < n) {    /* Input is valid */
-        std::cout << "You can eat " << MaximumCupCakes(n, c, m) << " cupcakes." << std::endl;
-    } else {                /* Input is invalid */
-        std::cout <<
-            "Oops! The program cannot run if the required wrappers is less"
-            " than 2 or if the price of a cupcake is greater than your budget."
-            << std::endl;                                                       /* User warning */
-    }
-}
-
-void challenge4() {
     // Initianize variables
     int playerPot, goalPot, stake;
 
@@ -127,28 +56,47 @@ void challenge4() {
     }
 }
 
-void introEnterName() {
-    std::cout << "Hello" << std::endl;          /* Hello world message */
+void challenge2() {
+    int player1Score = 12, player2Score = 12;
+    std::vector<int>die {0, 0, 0};
 
-    std::string name;                           /* Name storage */
-    std::cout << "Please put in your name: ";   /* Print instruction */
-    std::cin >> name;                           /* Get user input */
+    while(player1Score != 0 && player2Score != 0) {
+        // Roll the die.
+        for(int i = 0; i < die.size(); i++) {
+            die[i] = randomNumberGenerator(1, 6);
+        }
 
-    // Print final result
-    std::cout << std::endl << "Your name: " + name << std::endl;
-}
+        // Player 1 gains point.
+        if(die[0] + die[1] + die[2] == 11) {
+            player1Score ++;
+            player2Score --;
+        }
 
-int MaximumCupCakes(int n, int c, int m) {
-    int cupcakes = n / c;
-    int wrappers = cupcakes / m;
-    cupcakes += wrappers;
+        // Roll the die.
+        for(int i = 0; i < die.size(); i++) {
+            die[i] = randomNumberGenerator(1, 6);
+        }
 
-    while(wrappers > 1) {
-        wrappers /= m;
-        cupcakes += wrappers;
+        // Player 2 gains point.
+        if(die[0] + die[1] + die[2] == 14) {
+            player1Score --;
+            player2Score ++;
+        }
+
+        std::cout << "Player 1 score: " << player1Score << std::endl;
+        std::cout << "Player 2 score: " << player2Score << std::endl;
     }
 
-    return cupcakes;
+    std::cout << std::endl;
+
+    // End game.
+    if(player1Score == 0) {
+        std::cout << "Player 1 Loses." << std::endl;
+    } else {
+        std::cout << "Player 2 Loses." << std::endl;
+    }
+
+    std::cout << std::endl;
 }
 
 void gamblersRuin(int playerPot, int goalPot, int stake) {
@@ -170,7 +118,7 @@ void gamblersRuin(int playerPot, int goalPot, int stake) {
         std::cout << "Your Pot: " << playerPot << std::endl; /* Player information */
 
         while(playerPot >= stake && playerPot < goalPot) {
-            randomNumber = randomNumberGenerator(0.0, 1.0); /* Call randomNumberGenerator method */
+            randomNumber = randomNumberGenerator(0.0f, 1.0f); /* Call randomNumberGenerator method */
 
             // Points if statement
             if(randomNumber >= 0.5) {   /* Win points condition */
@@ -206,6 +154,14 @@ float randomNumberGenerator(float x, float y) {
     std::random_device randomDevice;
     std::mt19937 generator(randomDevice());
     std::uniform_real_distribution<> distributor(x, y);
+
+    return distributor(generator); /* Return final random number*/
+}
+
+int randomNumberGenerator(int x, int y) {
+    std::random_device randomDevice;
+    std::mt19937 generator(randomDevice());
+    std::uniform_int_distribution<> distributor(x, y);
 
     return distributor(generator); /* Return final random number*/
 }
