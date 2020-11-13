@@ -1,0 +1,6 @@
+﻿  Student.cpp
+C:\Users\Quinn Reilly\source\repos\lab_2\Student.cpp(165,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Quinn Reilly\source\repos\lab_2\Student.cpp(177,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Quinn Reilly\source\repos\lab_2\Student.cpp(215,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Quinn Reilly\source\repos\lab_2\Student.cpp(224,28): warning C4018: '<': signed/unsigned mismatch
+  lab_2.vcxproj -> C:\Users\Quinn Reilly\source\repos\lab_2\Debug\lab_2.exe

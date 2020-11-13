@@ -31,35 +31,40 @@ class Array {
    friend std::istream &operator>>( std::istream &, Array & );
 
 public:
-   explicit Array( int = 10 ); // default constructor
-	//**TO DO Declare the copy constructor
+    explicit Array( int = 10 ); // default constructor
+    //**TO DO Declare the copy constructor
+    Array(const Array&);
 
-	//**TO DO Declare the Move constructor 
-   
-   //**TODO  Declare the destructor
+    //**TO DO Declare the Move constructor
+    Array(Array&&) noexcept;
 
-   
-   size_t getSize() const; // return size
+    //**TODO  Declare the destructor
+    ~Array();
 
-   //**TODO  Declare the copy assignment operator
-   //**TODO Declare the Move assignment operator
-   
-   bool operator==( const Array & ) const; // equality operator
+    size_t getSize() const; // return size
 
-   // inequality operator; returns opposite of == operator
-   bool operator!=( const Array &right ) const  
-   { 
-      return ! ( *this == right ); // invokes Array::operator==
-   } // end function operator!=
-   
-   // subscript operator for non-const objects returns modifiable lvalue
-   int &operator[]( int );              
+    //**TODO Declare the copy assignment operator
+    const Array& operator=(const Array&);
 
-   // subscript operator for const objects returns rvalue
-   int operator[]( int ) const;  
+    //**TODO Declare the Move assignment operator
+    Array& operator=(Array&&) noexcept;
+
+    bool operator==( const Array & ) const; // equality operator
+
+    // inequality operator; returns opposite of == operator
+    bool operator!=( const Array &right ) const
+    {
+        return ! ( *this == right ); // invokes Array::operator==
+    } // end function operator!=
+
+    // subscript operator for non-const objects returns modifiable lvalue
+    int &operator[]( int );
+
+    // subscript operator for const objects returns rvalue
+    int operator[]( int ) const;
 private:
-   size_t size; // pointer-based array size
-   int *ptr; // pointer to first element of pointer-based array
+    size_t size; // pointer-based array size
+    int *ptr; // pointer to first element of pointer-based array
 }; // end class Array
 
 #endif

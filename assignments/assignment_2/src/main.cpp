@@ -27,30 +27,61 @@
 using namespace std;
 
 void outputArray(const Array &); // prototype
-void outputArray(int); // prototype
+void outputArray(int);
 
 int main() {
-   Array integers1(7); // 7-element Array
-   outputArray(integers1); // output Array integers1
-   outputArray(3); // convert 3 to an Array and output Array's contents
-   outputArray(Array(3)); // explicit single-argument constructor call
+   //Array integers1(7); // 7-element Array
+   //outputArray(integers1); // output Array integers1
+   //outputArray(4); // convert 3 to an Array and output Array's contents
+   //outputArray(Array(3)); // explicit single-argument constructor call
 
    //Add your code here to test each function of the Rule of Five
+   Array a1(10);
+   Array a2(a1);
 
+   outputArray(a1);
+   outputArray(a2);
+
+   Array a3(5);
+
+   outputArray(a3);
+
+   Array a4(move(a3));
+
+   outputArray(a3);
+   outputArray(a4);
+
+   a3 = a1;
+
+   outputArray(a3);
+
+   a4 = move(a2);
+
+   outputArray(a4);
+   outputArray(a2);
+
+   //Array integers5(std::move(integers4));
 
 }  // end main
 
 // print Array contents
 void outputArray(const Array &arrayToOutput)
 {
-   cout << "The Array received has " << arrayToOutput.getSize()
-      << " elements. The contents are:\n" << arrayToOutput << endl;
+    cout << "The Array received has " << arrayToOutput.getSize()
+        << " elements. The contents are:\n" << arrayToOutput << endl;
 } // end outputArray
 
-void outputArray(int) {
+void outputArray(int i) {
+    Array a{ i };
 
+    cout << "The Array received has " << a.getSize()
+        << " elements. The contents are:\n" << a << endl;
 }
 
+void outputArray(Array& a) {
+    cout << "The Array received has " << a.getSize()
+        << " elements. The contents are:\n" << a << endl;
+}
 
 
 

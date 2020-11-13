@@ -23,30 +23,37 @@
 // Array class member- and friend-function definitions.
 #include <iostream>
 #include <iomanip>
-#include <stdexcept> 
+#include <stdexcept>
 
 #include "Array.h" // Array class definition
 using namespace std;
 
 // default constructor for class Array (default size 10)
-Array::Array( int arraySize )
-   : size( arraySize > 0 ? arraySize : 
-        throw invalid_argument( "Array size must be greater than 0" ) ),
-     ptr( new int[ size ] )
-{
-   for ( size_t i = 0; i < size; ++i )
-      ptr[ i ] = 0; // set pointer-based array element
-} // end Array default constructor
+Array::Array( int arraySize ) : size( arraySize > 0 ? arraySize : throw invalid_argument("Array size must be greater than 0") ), ptr( new int[ size ] ) {
+   for ( size_t i = 0; i < size; i++)
+      ptr[ i ] = 0;     // set pointer-based array element
+}                       // end Array default constructor
 
 // copy constructor for class Array;
 // must receive a reference to an Array
 
 //**TO DO Implement the copy constructor
+Array::Array(const Array& inArray) : size{ inArray.size }, ptr{ new int[size] } {
+    for (size_t i = 0; i < size; i++)
+       ptr[i] = inArray.ptr[i];     // set pointer-based array element
+}
 
 //**TO DO implement the move constructor
+Array::Array(Array&& inArray) noexcept : size{ inArray.size }, ptr{ inArray.ptr } {
+    inArray.size = 0;
+    inArray.ptr = nullptr;
+}
 
 //**TODO  Implement the destructor
-
+Array::~Array() {
+    delete[] ptr;
+    ptr = nullptr;
+}
 
 // return number of elements of Array
 size_t Array::getSize() const
@@ -54,10 +61,37 @@ size_t Array::getSize() const
    return size; // number of elements in Array
 } // end function getSize
 
-//**TO DO overload the assignment operator 
+//**TO DO overload the assignment operator
+const Array& Array::operator=(const Array& inArray) {
+    if(inArray != *this) {
+        if(size != inArray.size) {
+            delete[] ptr;
+            size = inArray.size;
+            ptr = new int[size];
+        }
+
+        for(size_t i = 0; i < size; i++)
+            ptr[i] = inArray.ptr[i];     // set pointer-based array element
+
+    }
+
+    return *this;
+}
 
 //**TO DO overload the move assignment operator
+Array& Array::operator=(Array&& inArray) noexcept {
+    if(inArray != *this) {
+        delete[] ptr;
+        size = inArray.size;
+        ptr = inArray.ptr;
 
+        inArray.size = 0;
+        inArray.ptr = nullptr;
+
+    }
+
+    return *this;
+}
 
 // determine if two Arrays are equal and
 // return true, otherwise return false
@@ -103,14 +137,14 @@ istream &operator>>( istream &input, Array &a )
       input >> a.ptr[ i ];
 
    return input; // enables cin >> x >> y;
-} // end function 
+} // end function
 
-// overloaded output operator for class Array 
+// overloaded output operator for class Array
 ostream &operator<<( ostream &output, const Array &a )
 {
    size_t i;
 
-   // output private ptr-based array 
+   // output private ptr-based array
    for ( i = 0; i < a.size; ++i )
    {
       output << setw( 12 ) << a.ptr[ i ];
