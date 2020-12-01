@@ -1,0 +1,10 @@
+"Jeni Watt""Watt-J1@ulster.ac.uk""B10890022""BE Engineering"3
+3
+"COM149""Fundamental of Programming"20 70
+"COM326""Object Oriented Programming"20 90
+"COM328""Data Structures"20 90
+"Quinn Reilly""reilly-q@ulster.ac.uk""B00769147""BSc Computer Science"2
+3
+"COM149""Fundamental of Programming"20 70
+"COM326""Object Oriented Programming"20 90
+"COM328""Data Structures"20 90
