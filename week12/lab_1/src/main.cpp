@@ -9,7 +9,9 @@
 #include <iostream>
 #include <string>
 #include "SmartVector.h"
+
 #include "Player.h"
+#include "../inc/common.hpp"
 
 using namespace std;
 
@@ -27,7 +29,7 @@ int main(int argc, const char* argv[]) {
 	// 5. Start Playing the round - Player with startTurn will put the best card to start and determine trump suit
 	// 6. Continue with the game for 13 turns
 	// 7. Calculate score for the tricks and display result
-	
+
 	// Feel free to add any additional utility function to facilitate the gameplay implementation
 
 	return 0;
@@ -47,4 +49,3 @@ string DisplayCard(int winner, Card& c) {
 	// Format the output for display
 	// Display the player id, and winning move for each trick
 }
-

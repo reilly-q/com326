@@ -19,8 +19,8 @@ libs = ['sfml-window', 'sfml-graphics', 'sfml-system']
 
 # build environment variables
 
-env0 = Environment(CCFLAGS = '-std=c++14 -pthread')
-env1 = Environment(CCFLAGS = '-std=c++14 -pthread -Ilib/SFML-2.5.1/include')
+env0 = Environment(CCFLAGS = '-std=c++17 -pthread')
+env1 = Environment(CCFLAGS = '-std=c++17 -pthread -Ilib/SFML-2.5.1/include')
 
 # build option if statements
 

@@ -10,6 +10,7 @@
 #ifndef Player_h
 #define Player_h
 #include "SmartVector.h"
+#include "../inc/common.hpp"
 
 struct Card {
 	int value_;		// value from 2 - 14, 11 - Jack, 12 - Queen, 13 - King and 14 - Ace
@@ -17,10 +18,12 @@ struct Card {
 
 	// overload the less than operator (<)
 	bool operator<(const Card& c) const {
+        return value_ < c.value_;
 	}
 
 	// overload the equality operator (==)
 	bool operator==(const Card& c) const {
+        return suit_ == c.suit_;
 	}
 };
 
@@ -31,7 +34,7 @@ private:
 
 public:
 	Player(SmartVector<Card> c);	// custom constructor for Player
-	bool PlayCard(Card bestCard, std::string trump, int turn);		// function to play a card 
+	bool PlayCard(Card bestCard, std::string trump, int turn);		// function to play a card
 	std::string GetTrumpSuit();		// function to return the highest suit in a hand
 	int GetHandTotal();		// return the total hand calculation
 	void RemoveCard();		// remove a card from hand
@@ -39,4 +42,3 @@ public:
 };
 
 #endif /* Player_h */
-
